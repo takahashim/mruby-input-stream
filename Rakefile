@@ -4,12 +4,24 @@ file :mruby do
   sh "git clone --depth 1 git://github.com/mruby/mruby.git"
 end
 
-desc "test"
+task :default => :test
+
+desc "test this mrbgem"
 task :test => :mruby do
   sh "cd mruby && MRUBY_CONFIG=#{MRUBY_CONFIG} rake test"
 end
 
+desc "build mruby with this mrbgem"
+task :build => :mruby do
+  sh "cd mruby && MRUBY_CONFIG=#{MRUBY_CONFIG} rake all"
+end
+
 desc "cleanup"
 task :clean do
-  sh "cd mruby && rake deep_clean"
+  sh "cd mruby && rake deep_clean" if File.exist?("mruby")
+end
+
+desc "cleanup including temporary files"
+task :realclean do
+  sh "rm -rf mruby"
 end
