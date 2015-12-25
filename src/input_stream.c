@@ -5,6 +5,15 @@
 #include "mruby/string.h"
 #include "input_stream.h"
 
+typedef struct mrb_input_stream_t {
+  char *base;
+  mrb_int len;
+  mrb_int pos;
+} mrb_input_stream_t;
+
+static mrb_input_stream_t*
+mrb_input_stream_create(mrb_state *mrb, char *base, mrb_int len);
+
 static void
 mrb_mruby_input_stream_free(mrb_state *mrb, void *ptr);
 
