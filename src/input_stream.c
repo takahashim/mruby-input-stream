@@ -5,6 +5,12 @@
 #include "mruby/string.h"
 #include "input_stream.h"
 
+static void
+mrb_mruby_input_stream_free(mrb_state *mrb, void *ptr);
+
+static mrb_int
+seek_char(mrb_input_stream_t *stream, const char chr);
+
 const static struct mrb_data_type mrb_input_stream_type = {
   "InputStream",
   mrb_mruby_input_stream_free,
