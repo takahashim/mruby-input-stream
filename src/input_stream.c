@@ -90,7 +90,7 @@ mrb_input_stream_value(mrb_state *mrb, char *base, mrb_int len)
   return mrb_obj_value(d);
 }
 
-mrb_value
+static mrb_value
 mrb_input_stream_gets(mrb_state *mrb, mrb_value self)
 {
   mrb_input_stream_t *stream = DATA_PTR(self);
@@ -128,7 +128,7 @@ seek_char(mrb_input_stream_t *stream, char chr){
   return (s - start);
 }
 
-mrb_value
+static mrb_value
 mrb_input_stream_read(mrb_state *mrb, mrb_value self)
 {
   mrb_int len;
@@ -159,7 +159,7 @@ mrb_input_stream_read(mrb_state *mrb, mrb_value self)
   }
 }
 
-mrb_value
+static mrb_value
 mrb_input_stream_rewind(mrb_state *mrb, mrb_value self)
 {
   mrb_input_stream_t *stream = DATA_PTR(self);
@@ -168,7 +168,7 @@ mrb_input_stream_rewind(mrb_state *mrb, mrb_value self)
 }
 
 
-mrb_value
+static mrb_value
 mrb_input_stream_byteindex(mrb_state *mrb, mrb_value self)
 {
   mrb_input_stream_t *stream = DATA_PTR(self);
