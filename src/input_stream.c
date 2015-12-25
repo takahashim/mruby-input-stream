@@ -102,13 +102,13 @@ seek_char(mrb_input_stream_t *stream, char chr){
   char *base = stream->base;
   size_t len = stream->len;
   mrb_int pos = stream->pos;
+  const char *end = base + len;
+  char *start = base + pos;
+  char *s = start;
 
   if (pos >= len) {
     return -1;
   }
-  const char *end = base + len;
-  char *start = base + pos;
-  char *s = start;
 
   while (s < end) {
     if (*s == chr) {
@@ -162,8 +162,8 @@ mrb_input_stream_rewind(mrb_state *mrb, mrb_value self)
 mrb_value
 mrb_input_stream_byteindex(mrb_state *mrb, mrb_value self)
 {
-  mrb_int chr;
-  mrb_int n;
+  mrb_input_stream_t *stream = DATA_PTR(self);
+  mrb_int chr, n, len;
 
   n = mrb_get_args(mrb, "i", &chr);
   if (n != 1) {
@@ -173,9 +173,7 @@ mrb_input_stream_byteindex(mrb_state *mrb, mrb_value self)
     mrb_raise(mrb, E_ARGUMENT_ERROR, "index should be a byte (0 - 255)");
   }
 
-  mrb_input_stream_t *stream = DATA_PTR(self);
-
-  mrb_int len = seek_char(stream, chr);
+  len = seek_char(stream, chr);
   if (len < 0) {
     return mrb_nil_value();
   }
