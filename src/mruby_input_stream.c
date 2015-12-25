@@ -3,7 +3,7 @@
 #include "mruby/value.h"
 #include "mruby/data.h"
 #include "mruby/string.h"
-#include "input_stream.h"
+#include "mruby_input_stream.h"
 
 typedef struct mrb_input_stream_t {
   char *base;
